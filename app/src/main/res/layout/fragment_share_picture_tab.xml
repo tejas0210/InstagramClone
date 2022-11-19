@@ -1,10 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
     tools:context=".SharePictureTab">
 
+    <ImageView
+        android:id="@+id/imgShare"
+        android:layout_width="371dp"
+        android:layout_height="220dp"
+        android:layout_marginTop="48dp"
+        android:src="@drawable/plus"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/edtDescription"
+        android:layout_width="368dp"
+        android:layout_height="71dp"
+        android:layout_marginTop="48dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Enter Description..."
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/imgShare"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/imgShare"
+        app:layout_constraintTop_toBottomOf="@+id/imgShare" />
 
+    <Button
+        android:id="@+id/btnShare"
+        android:layout_width="369dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:text="Share"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/edtDescription"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/edtDescription"
+        app:layout_constraintTop_toBottomOf="@+id/edtDescription"
+        app:strokeColor="@color/black" />
 </androidx.constraintlayout.widget.ConstraintLayout>
