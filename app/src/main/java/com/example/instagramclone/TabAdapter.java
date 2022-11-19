@@ -43,7 +43,7 @@ public class TabAdapter extends FragmentPagerAdapter {
             case 0:
                 return "Profile";
             case 1:
-                return "User";
+                return "Users";
             case 2:
                 return "Post";
 
