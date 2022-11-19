@@ -34,7 +34,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnSignUp.setOnClickListener(this);
 
         if(ParseUser.getCurrentUser()!=null){
-            ParseUser.getCurrentUser().logOut();
+//            ParseUser.getCurrentUser().logOut();
+            transitionToHomePage();
         }
     }
 
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 FancyToast.makeText(MainActivity.this,user.getUsername()+" is Logged In successfully",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
                                 Intent intent = new Intent(MainActivity.this, Home_Page.class);
                                 startActivity(intent);
+                                transitionToHomePage();
                             }
                             else{
                                 FancyToast.makeText(MainActivity.this,e.getMessage(),FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
@@ -72,4 +74,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     }
+
+    public void transitionToHomePage(){
+        Intent intent = new Intent(MainActivity.this,Home_Page.class);
+        startActivity(intent);
+    }
+
 }
