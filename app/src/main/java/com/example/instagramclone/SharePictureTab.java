@@ -134,14 +134,14 @@ public class SharePictureTab extends Fragment implements View.OnClickListener {
                         parseObject.put("ImgDescription",edtDescription.getText().toString());
                         parseObject.put("Username", ParseUser.getCurrentUser().getUsername());
                         final ProgressDialog dialog = new ProgressDialog(getContext());
-                        dialog.setMessage("Loading");
+                        dialog.setMessage("Loading...");
                         dialog.show();
 
                         parseObject.saveInBackground(new SaveCallback() {
                             @Override
                             public void done(ParseException e) {
                                 if(e == null){
-                                    FancyToast.makeText(getContext(),"Done!!",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,true).show();
+                                    FancyToast.makeText(getContext(),"Uploaded",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,true).show();
                                 }
                                 else{
                                     FancyToast.makeText(getContext(),"Unknown Error",FancyToast.LENGTH_SHORT,FancyToast.ERROR,true).show();

@@ -2,7 +2,6 @@ package com.example.instagramclone;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -71,13 +70,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnSignUp:
                 Intent intent = new Intent(MainActivity.this, SignUp_Activity.class);
                 startActivity(intent);
-
+                break;
         }
     }
 
     public void transitionToHomePage(){
         Intent intent = new Intent(MainActivity.this,Home_Page.class);
         startActivity(intent);
+        finish();
     }
 
 }

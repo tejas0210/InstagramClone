@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -30,37 +31,59 @@ public class SignUp_Activity extends AppCompatActivity {
         edtSUsername = findViewById(R.id.edtSUsername);
         edtSPassword = findViewById(R.id.edtSPassword);
 
-        btnCreateAccount.setOnClickListener(new View.OnClickListener() {
+        btnCreateAccount.setOnClickListener(this::onClick);
+
+        if (ParseUser.getCurrentUser() != null) {
+            // ParseUser.getCurrentUser().logOut();
+            transitionToSocialMediaActivity();
+        }
+    }
+
+
+    public void onClick(View signUpPressed) {
+        final ParseUser newUser = new ParseUser();
+        newUser.setEmail(edtEmail.getText().toString());
+        newUser.setUsername(edtSUsername.getText().toString());
+        newUser.setPassword(edtSPassword.getText().toString());
+
+        final ProgressDialog progressDialog = new ProgressDialog(SignUp_Activity.this);
+        progressDialog.setMessage("Signing up in "+ParseUser.getCurrentUser().getUsername());
+        progressDialog.show();
+        newUser.signUpInBackground(new SignUpCallback() {
             @Override
-            public void onClick(View signUpPressed) {
-                ParseUser newUser = new ParseUser();
-                newUser.setEmail(edtEmail.getText().toString());
-                newUser.setUsername(edtSUsername.getText().toString());
-                newUser.setPassword(edtSPassword.getText().toString());
-
-                ProgressDialog progressDialog = new ProgressDialog(SignUp_Activity.this);
-                progressDialog.setMessage("Signing up in "+ParseUser.getCurrentUser().getUsername());
-                progressDialog.show();
-                newUser.signUpInBackground(new SignUpCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        try {
-                            if(e==null){
-                                Intent intent = new Intent(SignUp_Activity.this, Home_Page.class);
-                                startActivity(intent);
-                                FancyToast.makeText(SignUp_Activity.this,newUser.getUsername()+" is Signed Up successfully",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
-                            }
-                            else{
-                                FancyToast.makeText(SignUp_Activity.this,e.getMessage(),FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
-                            }
-
-                        }catch(Exception e1){
-                            FancyToast.makeText(SignUp_Activity.this,e1.getMessage(),FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
-                        }
-                        progressDialog.dismiss();
+            public void done(ParseException e) {
+                try {
+                    if(e==null){
+                        Intent intent = new Intent(SignUp_Activity.this, Home_Page.class);
+                        startActivity(intent);
+                        FancyToast.makeText(SignUp_Activity.this,newUser.getUsername()+" is Signed Up successfully",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
                     }
-                });
+                    else{
+                        FancyToast.makeText(SignUp_Activity.this,e.getMessage(),FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+                    }
+
+                }catch(Exception e1){
+                    FancyToast.makeText(SignUp_Activity.this,e1.getMessage(),FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
+                }
+                progressDialog.dismiss();
             }
         });
+    }
+
+    public void rootLayoutTapped(View view) {
+        try {
+            InputMethodManager inputMethodManager =
+                    (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void transitionToSocialMediaActivity() {
+        Intent intent = new Intent(SignUp_Activity.this, Home_Page.class);
+        startActivity(intent);
+        finish();
     }
 }
