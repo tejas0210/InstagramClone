@@ -78,6 +78,8 @@ public class Home_Page extends AppCompatActivity {
         else if (item.getItemId() == R.id.logoutUserItem){
             ParseUser.getCurrentUser().logOut();
             finish();
+            Intent intent = new Intent(Home_Page.this, MainActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

@@ -37,5 +37,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
     implementation "com.github.parse-community.Parse-SDK-Android:parse:4.1.0"
     implementation 'io.github.shashank02051997:FancyToast:2.0.2'
-
+    implementation 'com.github.mjn1369:prettydialog:1.0.4'
 }

@@ -35,7 +35,7 @@ public class SignUp_Activity extends AppCompatActivity {
 
         if (ParseUser.getCurrentUser() != null) {
             // ParseUser.getCurrentUser().logOut();
-            transitionToSocialMediaActivity();
+            transitionToHomePage1();
         }
     }
 
@@ -47,16 +47,15 @@ public class SignUp_Activity extends AppCompatActivity {
         newUser.setPassword(edtSPassword.getText().toString());
 
         final ProgressDialog progressDialog = new ProgressDialog(SignUp_Activity.this);
-        progressDialog.setMessage("Signing up in "+ParseUser.getCurrentUser().getUsername());
+        progressDialog.setMessage("Signing Up in " +newUser.getUsername());
         progressDialog.show();
         newUser.signUpInBackground(new SignUpCallback() {
             @Override
             public void done(ParseException e) {
                 try {
                     if(e==null){
-                        Intent intent = new Intent(SignUp_Activity.this, Home_Page.class);
-                        startActivity(intent);
                         FancyToast.makeText(SignUp_Activity.this,newUser.getUsername()+" is Signed Up successfully",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
+                        transitionToHomePage1();
                     }
                     else{
                         FancyToast.makeText(SignUp_Activity.this,e.getMessage(),FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
@@ -70,18 +69,18 @@ public class SignUp_Activity extends AppCompatActivity {
         });
     }
 
-    public void rootLayoutTapped(View view) {
-        try {
-            InputMethodManager inputMethodManager =
-                    (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+//    public void rootLayoutTapped(View view) {
+//        try {
+//            InputMethodManager inputMethodManager =
+//                    (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+//            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void transitionToSocialMediaActivity() {
+    private void transitionToHomePage1() {
         Intent intent = new Intent(SignUp_Activity.this, Home_Page.class);
         startActivity(intent);
         finish();

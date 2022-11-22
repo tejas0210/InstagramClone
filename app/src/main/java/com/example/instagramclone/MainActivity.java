@@ -50,8 +50,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         public void done(ParseUser user, ParseException e) {
                             if(user!=null && e==null){
                                 FancyToast.makeText(MainActivity.this,user.getUsername()+" is Logged In successfully",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
-                                Intent intent = new Intent(MainActivity.this, Home_Page.class);
-                                startActivity(intent);
                                 transitionToHomePage();
                             }
                             else{
@@ -68,8 +66,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btnSignUp:
-                Intent intent = new Intent(MainActivity.this, SignUp_Activity.class);
+                Intent intent = new Intent(MainActivity.this,SignUp_Activity.class);
                 startActivity(intent);
+                finish();
                 break;
         }
     }
